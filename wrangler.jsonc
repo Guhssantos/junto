@@ -1,0 +1,12 @@
+// Cloudflare Workers (plano gratuito): publica a versão web (pasta dist/) como site estático.
+// Build: npm run build:web  ·  Deploy: npx wrangler deploy
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "junto",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // Rotas do app (/lists/..., /join/CODIGO) abrem o index.html, como num app de página única.
+    "not_found_handling": "single-page-application"
+  }
+}
