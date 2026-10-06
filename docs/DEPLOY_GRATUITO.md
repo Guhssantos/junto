@@ -45,7 +45,7 @@ Tempo estimado: 30–40 minutos na primeira vez.
    - **Environment variables:** `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_KEY` (e `NODE_VERSION` = `22`)
 3. **Save and Deploy.** Em ~3 minutos o site estará em `https://SEU-PROJETO.pages.dev`. Cada `git push` publica uma nova versão.
 
-Rotas (`/join/ABCD-1234`, `/lists/...`) e cache já estão configurados em `public/_redirects` e `public/_headers`.
+Rotas (`/join/ABCD-1234`, `/lists/...`) e cache já estão configurados em `wrangler.jsonc` (Cloudflare), `netlify.toml`/`vercel.json` e `public/_headers`.
 
 > **Alternativas equivalentes:** Netlify (usa `netlify.toml`, já incluído) ou Vercel (usa `vercel.json`, já incluído — o plano gratuito da Vercel é só para uso não comercial).
 

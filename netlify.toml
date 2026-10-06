@@ -1,9 +1,15 @@
 # Netlify (plano gratuito): conecte o repositório e defina as variáveis
 # EXPO_PUBLIC_SUPABASE_URL e EXPO_PUBLIC_SUPABASE_KEY em Site settings → Environment variables.
-# Rotas e cabeçalhos vêm de public/_redirects e public/_headers.
+# Rotas: [[redirects]] abaixo. Cabeçalhos: public/_headers.
 [build]
   command = "npm run build:web"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "22"
+
+# Rotas do app (/lists/..., /join/CODIGO) abrem o index.html (app de página única).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

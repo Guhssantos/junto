@@ -118,7 +118,7 @@ supabase/
   migrations/          Esquema, segurança (RLS), regras de negócio (RPC), realtime/push/storage
   functions/send-push/ Edge Function de push
   tests/               Testes SQL
-public/                Arquivos da versão web: index.html, manifest (PWA), service worker, ícones, _redirects/_headers
+public/                Arquivos da versão web: index.html, manifest (PWA), service worker, ícones, _headers
 scripts/               setup (cria o .env) e testes do banco
 .github/workflows/     CI, deploy do banco e keep-alive do Supabase
 docs/                  Arquitetura, banco, segurança, configuração, deploy, desenvolvimento, revisão
