@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { FlatList, Platform, Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 import { EmptyState, ErrorState, Icon, Loading, Text } from '@/components/ui';
@@ -57,7 +57,12 @@ export function ChatView({ listId, productId, readOnly }: { listId: string; prod
     return m;
   }, [members.data]);
 
-  const items = useMemo(() => [...(data ?? [])].reverse(), [data]);
+  // Celular: lista invertida (mais nova embaixo, padrão de chat). Na web o "inverted" do
+  // FlatList é aplicado duas vezes (React Native + react-native-web) e a ordem saía trocada:
+  // lá a lista fica na ordem natural e rola sozinha até a última mensagem.
+  const INVERTED = Platform.OS !== 'web';
+  const listRef = useRef<FlatList<Message>>(null);
+  const items = useMemo(() => (INVERTED ? [...(data ?? [])].reverse() : (data ?? [])), [data, INVERTED]);
   const canSend = !readOnly && perms.can('chat.send');
 
   const send = () => {
@@ -111,12 +116,16 @@ export function ChatView({ listId, productId, readOnly }: { listId: string; prod
         />
       ) : (
         <FlatList
+          ref={listRef}
           data={items}
-          inverted
+          inverted={INVERTED}
           keyExtractor={(m) => m.id}
           renderItem={renderItem}
-          contentContainerStyle={{ padding: 16, gap: 10 }}
+          contentContainerStyle={[{ padding: 16, gap: 10 }, !INVERTED && { flexGrow: 1, justifyContent: 'flex-end' }]}
           keyboardShouldPersistTaps="handled"
+          onContentSizeChange={() => {
+            if (!INVERTED) listRef.current?.scrollToEnd({ animated: false });
+          }}
         />
       )}
       {canSend ? (

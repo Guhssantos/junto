@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Falha de segurança
+    url: https://github.com/Guhssantos/junto/security/advisories/new
+    about: Relate de forma privada, sem expor a falha publicamente.
+  - name: 📱 Abrir o app
+    url: https://junto.gusttavo-ssantos.workers.dev
+    about: Use o Junto no celular ou computador.

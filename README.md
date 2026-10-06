@@ -1,10 +1,47 @@
 # Junto — lista de compras colaborativa
 
-Aplicativo para casais, famílias e amigos fazerem compras juntos: lista compartilhada em tempo real, preços, chat por produto, "Perguntar ao parceiro", modo mercado, histórico e funcionamento offline.
+**Faça as compras junto com quem divide a casa, em tempo real.**
 
-Funciona em **Android, iOS e no navegador** (computador e celular, instalável como app/PWA) — com o mesmo código e o mesmo backend.
+[![CI](https://github.com/Guhssantos/junto/actions/workflows/ci.yml/badge.svg)](https://github.com/Guhssantos/junto/actions/workflows/ci.yml)
+[![Licença MIT](https://img.shields.io/badge/licen%C3%A7a-MIT-green.svg)](LICENSE)
+[![Abrir o app](https://img.shields.io/badge/app-junto.gusttavo--ssantos.workers.dev-17643F)](https://junto.gusttavo-ssantos.workers.dev)
 
-> **Quer só colocar no ar, de graça?** Siga [docs/DEPLOY_GRATUITO.md](docs/DEPLOY_GRATUITO.md) (Supabase Free + Cloudflare Pages + GitHub Actions, sem cartão de crédito).
+👉 **Use agora, de graça:** <https://junto.gusttavo-ssantos.workers.dev> (celular ou computador; dá para instalar na tela inicial)
+
+## A história
+
+A ideia surgiu numa ida ao supermercado com a minha mãe. Para descobrir onde cada produto valia mais a pena, a gente acabava pesquisando preços e indo a dois ou mais mercados. E a lista, os preços e as decisões ("levo esse ou compro no outro?") ficavam espalhados entre papel, memória e mensagens soltas.
+
+O **Junto** coloca tudo isso num só lugar: duas (ou mais) pessoas compartilham a mesma lista. Enquanto uma está no mercado anotando o preço que encontrou, a outra acompanha **na hora**, de onde estiver, e ajuda a decidir o que comprar.
+
+| Decisão em tempo real | Preço encontrado × estimado | Conversa na lista |
+| :---: | :---: | :---: |
+| <img src="docs/screenshots/01-decisao-em-tempo-real.jpg" width="230" alt="Pedido de aprovação de um produto encontrado no mercado"> | <img src="docs/screenshots/02-precos-comparados.jpg" width="230" alt="Itens com preço encontrado comparado ao estimado"> | <img src="docs/screenshots/03-conversa.jpg" width="230" alt="Chat da lista comparando preços entre mercados"> |
+| **Adicionar produto** | **Convite por QR Code** | |
+| <img src="docs/screenshots/04-adicionar-produto.jpg" width="230" alt="Adicionar produto com quantidade, preço e unidade"> | <img src="docs/screenshots/05-compartilhar.jpg" width="230" alt="Compartilhar lista por QR Code ou código"> | |
+
+## O que ele faz
+
+- 🛒 **Lista compartilhada em tempo real**: quem está em casa vê cada item marcado e cada preço no mesmo instante.
+- 💰 **Preço estimado × encontrado**: mostra quanto cada item ficou acima ou abaixo do esperado e o total atualizado da compra.
+- 🙋 **"Perguntar ao parceiro"**: achou algo fora da lista ou em promoção? Pergunta antes de colocar no carrinho; a outra pessoa aprova ou recusa.
+- 💬 **Chat por lista e por produto**, com **fotos** (câmera ou galeria): "é essa marca?"
+- 📲 **Convite por link, código ou QR Code**, com aprovação de quem criou a lista.
+- 🧺 **Modo mercado**: tela simplificada para usar com uma mão no corredor.
+- 📴 **Funciona sem internet**: a lista abre e as alterações são enviadas quando o sinal volta.
+- 🔔 **Alertas** (deslize para excluir) e notificações push no app nativo.
+- 📱 **Celular, tablet e computador**: web/PWA instalável, Android e iOS com o mesmo código.
+- 🔒 **Privacidade**: cada pessoa só vê as listas de que participa (regras no próprio banco — RLS), fotos em armazenamento privado e exclusão de conta (LGPD).
+
+## Contribua
+
+Ideias e contribuições são muito bem-vindas! Veja o [guia de contribuição](CONTRIBUTING.md) para rodar o projeto na sua máquina em poucos minutos, ou [abra uma issue](https://github.com/Guhssantos/junto/issues/new/choose) com um problema ou sugestão.
+
+Próximas ideias: histórico de preços por mercado ("onde está mais barato"), itens recorrentes e sugestões automáticas — veja as [issues](https://github.com/Guhssantos/junto/issues).
+
+---
+
+## Como foi feito
 
 | Camada | Tecnologia |
 | --- | --- |
@@ -14,7 +51,7 @@ Funciona em **Android, iOS e no navegador** (computador e celular, instalável c
 | Push | Expo Push Service via Edge Function `send-push` |
 | Estado e offline | TanStack Query (cache persistido) + fila de alterações própria |
 | Testes | Jest + Testing Library (app) e testes SQL em PostgreSQL (PGlite embutido, sem instalar nada) |
-| Hospedagem web | Cloudflare Pages / Netlify / Vercel (configurações incluídas) |
+| Hospedagem web | Cloudflare Workers (publicado) · Netlify / Vercel (configurações incluídas) |
 | Automação | GitHub Actions: CI, deploy do banco e keep-alive do Supabase |
 
 > Por que essas escolhas: veja [docs/ARQUITETURA.md](docs/ARQUITETURA.md).

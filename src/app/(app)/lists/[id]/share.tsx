@@ -95,7 +95,8 @@ export default function ShareList() {
               </View>
               <View style={{ flexDirection: 'row', gap: 10, alignSelf: 'stretch' }}>
                 <Button
-                  label="Copiar código"
+                  label="Copiar"
+                  accessibilityHint="Copia o código de convite"
                   icon="copy"
                   variant="secondary"
                   size="md"
@@ -159,6 +160,7 @@ export default function ShareList() {
                 label={ROLE_LABEL[m.role_id] ?? m.role_id}
                 bg={m.role_id === 'admin' ? colors.primarySoft : colors.surfaceAlt}
                 fg={m.role_id === 'admin' ? colors.text : colors.textSubtle}
+                style={{ alignSelf: 'center' }}
               />
               {canRemove ? (
                 <Button

@@ -1,0 +1,39 @@
+name: 🐞 Algo não funciona
+description: Relate um problema no Junto
+labels: [bug]
+body:
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu?
+      description: Descreva o problema e o que você esperava que acontecesse.
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Passos para reproduzir
+      placeholder: |
+        1. Abri a lista...
+        2. Toquei em...
+        3. Apareceu...
+    validations:
+      required: true
+  - type: dropdown
+    id: onde
+    attributes:
+      label: Onde você estava usando?
+      multiple: true
+      options:
+        - Celular Android (navegador ou app instalado)
+        - iPhone (navegador ou app instalado)
+        - Computador (navegador)
+        - Tablet
+        - App nativo (Expo Go / APK)
+    validations:
+      required: true
+  - type: textarea
+    id: prints
+    attributes:
+      label: Prints ou vídeo (opcional)
+      description: Arraste imagens aqui. Não mostre e-mails, senhas ou dados pessoais.

@@ -32,9 +32,9 @@ export function Card({ children, style, onPress, accessibilityLabel }: {
 }
 
 // ---------------------------------------------------------------------------
-export function Badge({ label, bg, fg, strike }: { label: string; bg: string; fg: string; strike?: boolean }) {
+export function Badge({ label, bg, fg, strike, style }: { label: string; bg: string; fg: string; strike?: boolean; style?: StyleProp<ViewStyle> }) {
   return (
-    <View style={[styles.badge, { backgroundColor: bg }]}>
+    <View style={[styles.badge, { backgroundColor: bg }, style]}>
       <Text variant="micro" style={{ color: fg, textDecorationLine: strike ? 'line-through' : 'none' }}>
         {label}
       </Text>

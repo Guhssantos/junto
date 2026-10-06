@@ -1,0 +1,23 @@
+name: 💡 Ideia ou melhoria
+description: Sugira uma funcionalidade para o Junto
+labels: [ideia]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual situação essa ideia resolve?
+      description: Conte a situação real (ex.:"no mercado, eu quero saber...").
+    validations:
+      required: true
+  - type: textarea
+    id: ideia
+    attributes:
+      label: Como você imagina que funcionaria?
+    validations:
+      required: true
+  - type: checkboxes
+    id: ajuda
+    attributes:
+      label: Contribuição
+      options:
+        - label: Eu gostaria de ajudar a implementar
