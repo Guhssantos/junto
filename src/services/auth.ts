@@ -54,7 +54,8 @@ export async function resetPasswordWithCode(input: { email: string; code: string
   const email = check(emailSchema, input.email);
   const password = check(passwordSchema, input.password);
   const token = input.code.replace(/\D/g, '');
-  if (token.length !== 6) throw new AppError('validation', 'Digite o código de 6 dígitos enviado por e-mail.');
+  // O tamanho do código é configurável no Supabase (6 a 8 dígitos).
+  if (token.length < 6 || token.length > 8) throw new AppError('validation', 'Digite o código enviado por e-mail (6 dígitos).');
   const { error: otpError } = await supabase.auth.verifyOtp({ email, token, type: 'recovery' });
   if (otpError) throw toAppError({ ...otpError, code: 'otp_expired' });
   const { error } = await supabase.auth.updateUser({ password });

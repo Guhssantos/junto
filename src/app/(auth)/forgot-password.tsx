@@ -49,7 +49,7 @@ export default function ForgotPassword() {
       ) : (
         <>
           <Text tone="muted">Se existir uma conta para {email.trim()}, você receberá um código em instantes. Confira também o spam.</Text>
-          <Input label="Código de 6 dígitos" value={code} onChangeText={(t) => setCode(t.replace(/\D/g, '').slice(0, 6))} keyboardType="number-pad" autoComplete="one-time-code" textContentType="oneTimeCode" />
+          <Input label="Código enviado por e-mail" value={code} onChangeText={(t) => setCode(t.replace(/\D/g, '').slice(0, 8))} keyboardType="number-pad" autoComplete="one-time-code" textContentType="oneTimeCode" />
           <Input label="Nova senha" value={password} onChangeText={setPassword} secureTextEntry autoComplete="new-password" hint="Mínimo de 8 caracteres, com letras e números." error={error} />
           <Button
             label="Salvar nova senha"
