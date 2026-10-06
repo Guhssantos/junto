@@ -208,6 +208,8 @@ function EditProductForm({ product, onClose }: { product: Product; onClose: () =
           <Input
             label="Preço estimado"
             placeholder="R$ 0,00"
+            // Valor já preenchido fica selecionado: digitar substitui em vez de somar dígitos.
+            selectTextOnFocus
             keyboardType="number-pad"
             value={estimated}
             onChangeText={(t) => setEstimated(maskBRLInput(t))}

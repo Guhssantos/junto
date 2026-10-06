@@ -55,3 +55,12 @@ supabase/.branches/
 
 # Cloudflare Wrangler (arquivos locais)
 .wrangler/
+
+# vídeo: dependências e quadros temporários
+video/node_modules/
+video/frames/
+video/app-dist/
+video/capturas/
+video/revisao-*.jpg
+video/*.mp4
+video/capa*.png

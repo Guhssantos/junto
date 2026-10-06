@@ -127,6 +127,8 @@ function AddProductForm({ listId, onClose }: { listId: string; onClose: () => vo
           <Input
             label="Preço estimado"
             placeholder="R$ 0,00"
+            // Valor já preenchido fica selecionado: digitar substitui em vez de somar dígitos.
+            selectTextOnFocus
             keyboardType="number-pad"
             value={price}
             onChangeText={(t) => setPrice(maskBRLInput(t))}

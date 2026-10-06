@@ -1,0 +1,14 @@
+{
+  "name": "junto-video",
+  "private": true,
+  "type": "module",
+  "description": "Gera o vídeo de apresentação do Junto (telas reais + animação) usando o Chrome instalado.",
+  "scripts": {
+    "capturar": "node capturar-telas.mjs",
+    "renderizar": "node renderizar.mjs"
+  },
+  "dependencies": {
+    "mp4-muxer": "^5.2.1",
+    "puppeteer-core": "^25.12.0"
+  }
+}

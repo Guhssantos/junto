@@ -40,6 +40,8 @@ function PriceForm({ product, onClose, markPurchased }: { product: Product; onCl
       <Input
         label="Preço encontrado (por unidade)"
         placeholder="0,00"
+        // Valor já preenchido fica selecionado: digitar substitui em vez de somar dígitos.
+        selectTextOnFocus
         keyboardType="number-pad"
         autoFocus
         value={value}

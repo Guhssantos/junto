@@ -70,7 +70,7 @@ function AskForm({ listId, product, onClose }: { listId: string; product?: Produ
           <Stepper label="Quantidade" value={quantity} onChange={setQuantity} />
         </>
       ) : null}
-      <Input label="Preço encontrado" placeholder="0,00" keyboardType="number-pad" value={price} onChangeText={(t) => setPrice(maskBRLInput(t))} />
+      <Input label="Preço encontrado" placeholder="0,00" keyboardType="number-pad" selectTextOnFocus value={price} onChangeText={(t) => setPrice(maskBRLInput(t))} />
       <Input
         label="Mensagem (opcional)"
         placeholder={product ? 'Ex.: Não tem a marca de sempre, pode ser esta?' : 'Ex.: Está na promoção!'}

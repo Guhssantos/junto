@@ -8,6 +8,12 @@
 
 👉 **Use agora, de graça:** <https://junto.gusttavo-ssantos.workers.dev> (celular ou computador; dá para instalar na tela inicial)
 
+### 🎬 Veja o app funcionando (1min38s)
+
+[![Vídeo de apresentação do Junto](docs/video/capa.png)](docs/video/junto-apresentacao.mp4)
+
+<sub>Telas reais do app: duas pessoas usando a mesma lista ao mesmo tempo. Como o vídeo foi gerado: [video/README.md](video/README.md).</sub>
+
 ## A história
 
 A ideia surgiu numa ida ao supermercado com a minha mãe. Para descobrir onde cada produto valia mais a pena, a gente acabava pesquisando preços e indo a dois ou mais mercados. E a lista, os preços e as decisões ("levo esse ou compro no outro?") ficavam espalhados entre papel, memória e mensagens soltas.
