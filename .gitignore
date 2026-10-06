@@ -52,3 +52,6 @@ supabase/.branches/
 
 # build web
 /dist
+
+# Cloudflare Wrangler (arquivos locais)
+.wrangler/
