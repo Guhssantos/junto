@@ -30,24 +30,22 @@ Tempo estimado: 30–40 minutos na primeira vez.
 4. **Authentication → URL Configuration → Site URL**: coloque o endereço do site (passo 2), ex.: `https://junto.pages.dev`. Em *Redirect URLs*, adicione também `https://junto.pages.dev/**`.
 5. Anote em **Project Settings → API**: a **Project URL** e a chave **anon / publishable** (pública). **Nunca** use a `service_role`/`secret` no app ou no site.
 
-## Passo 2 — Site (Cloudflare Pages)
+## Passo 2 — Site (Cloudflare Workers, gratuito)
 
-1. Envie o projeto para um repositório no GitHub (pode ser privado):
-   ```bash
-   git init && git add . && git commit -m "Junto"
-   git branch -M main
-   git remote add origin https://github.com/SEU_USUARIO/junto.git
-   git push -u origin main
-   ```
-2. Em <https://dash.cloudflare.com> → **Workers & Pages → Create → Pages → Connect to Git**, escolha o repositório e configure:
+O repositório já tem o `wrangler.jsonc` (site estático + rotas de app de página única).
+
+1. Crie a conta em <https://dash.cloudflare.com/sign-up>.
+2. **Compute (Workers) → Workers & Pages → Create → Import a repository** → conecte o GitHub e escolha o repositório.
+3. Preencha:
+   - **Project name:** `junto` (precisa ser igual ao `name` do `wrangler.jsonc`)
    - **Build command:** `npm run build:web`
-   - **Build output directory:** `dist`
-   - **Environment variables:** `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_KEY` (e `NODE_VERSION` = `22`)
-3. **Save and Deploy.** Em ~3 minutos o site estará em `https://SEU-PROJETO.pages.dev`. Cada `git push` publica uma nova versão.
+   - **Deploy command:** `npx wrangler deploy` (padrão)
+   - **Advanced settings → Variable name/value** (não criptografar): `EXPO_PUBLIC_SUPABASE_URL`, `EXPO_PUBLIC_SUPABASE_KEY` e `NODE_VERSION` = `22`
+4. **Deploy**. O site fica em `https://junto.<sua-conta>.workers.dev`. Cada `git push` na `main` publica uma nova versão sozinho.
 
-Rotas (`/join/ABCD-1234`, `/lists/...`) e cache já estão configurados em `wrangler.jsonc` (Cloudflare), `netlify.toml`/`vercel.json` e `public/_headers`.
-
-> **Alternativas equivalentes:** Netlify (usa `netlify.toml`, já incluído) ou Vercel (usa `vercel.json`, já incluído — o plano gratuito da Vercel é só para uso não comercial).
+> Não use um arquivo `public/_redirects` com `/* /index.html 200`: o Cloudflare recusa como "laço infinito". As rotas já são tratadas por `not_found_handling` no `wrangler.jsonc`.
+>
+> Alternativas: Netlify (`netlify.toml`) ou Vercel (`vercel.json`), já incluídos.
 
 ## Passo 3 — Usar no celular e no computador
 
