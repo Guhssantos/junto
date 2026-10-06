@@ -1,0 +1,31 @@
+# Evita que o projeto Supabase do plano gratuito seja pausado por inatividade
+# (o Supabase pausa após ~7 dias sem uso). Roda 2x por semana, de graça.
+#
+# Configure em Settings → Secrets and variables → Actions:
+#   SUPABASE_URL  ex.: https://abcd1234.supabase.co
+#   SUPABASE_KEY  a anon/publishable key (a mesma do app — é pública)
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: '17 9 * * 1,4' # segunda e quinta, 06:17 (Brasília)
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ping no banco
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+            echo "::warning::Defina os secrets SUPABASE_URL e SUPABASE_KEY para manter o projeto ativo."
+            exit 0
+          fi
+          curl -fsS --retry 3 --retry-delay 10 -X POST "$SUPABASE_URL/rest/v1/rpc/keepalive" \
+            -H "apikey: $SUPABASE_KEY" -H "Authorization: Bearer $SUPABASE_KEY" \
+            -H "Content-Type: application/json" -d '{}'
+          echo

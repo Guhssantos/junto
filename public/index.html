@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="%LANG_ISO_CODE%">
+  <head>
+    <meta charset="utf-8" />
+    <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <title>%WEB_TITLE%</title>
+    <!-- PWA: "Adicionar à tela inicial" no Android/iPhone e instalação no computador -->
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Junto" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#F6F5F1" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0F1113" />
+    <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
+    <style id="expo-reset">
+      /* These styles make the body full-height */
+      html,
+      body {
+        height: 100%;
+        background-color: #f6f5f1;
+      }
+      @media (prefers-color-scheme: dark) {
+        html,
+        body {
+          background-color: #0f1113;
+        }
+      }
+      html {
+        /* Não aumenta o texto sozinho ao girar o iPhone */
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+      }
+      html,
+      body {
+        /* Sem zoom por toque duplo (o zoom com dois dedos continua disponível) */
+        touch-action: manipulation;
+      }
+      @media (pointer: coarse) {
+        /* iPhone amplia a página ao focar campo com fonte < 16px e não volta ao normal */
+        input,
+        textarea,
+        select {
+          font-size: 16px !important;
+        }
+      }
+      /* These styles disable body scrolling if you are using <ScrollView> */
+      body {
+        overflow: hidden;
+        overscroll-behavior: none;
+      }
+      /* These styles make the root element full-height */
+      #root {
+        display: flex;
+        flex: 1;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: var(--app-top, 0px);
+        /* Altura da área visível: com o teclado aberto o app encolhe em vez de ficar atrás dele. */
+        height: var(--app-height, 100%);
+      }
+    </style>
+    <script>
+      // iPhone/iPad: impede o zoom automático ao focar campos. No iOS o usuário ainda
+      // consegue ampliar com dois dedos (o Safari ignora o limite para gestos), então a
+      // acessibilidade é mantida. Android não recebe o limite (lá ele bloquearia o zoom).
+      (function () {
+        var ios = /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (!ios) return;
+        var meta = document.querySelector('meta[name=viewport]');
+        if (meta && meta.content.indexOf('maximum-scale') === -1) meta.content += ', maximum-scale=1';
+      })();
+    </script>
+    <script>
+      // Teclado virtual no celular: ajusta o app à área visível (iPhone/Safari não encolhe a
+      // página sozinho) e rola o campo focado para dentro da tela.
+      (function () {
+        var vv = window.visualViewport;
+        if (!vv) return;
+        var root = document.documentElement;
+        function apply() {
+          if (vv.scale > 1.01) return; // zoom com os dedos: não é teclado
+          root.style.setProperty('--app-height', vv.height + 'px');
+          root.style.setProperty('--app-top', vv.offsetTop + 'px');
+          var el = document.activeElement;
+          if (el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+            setTimeout(function () {
+              if (el.scrollIntoView) el.scrollIntoView({ block: 'nearest' });
+            }, 50);
+          }
+        }
+        vv.addEventListener('resize', apply);
+        vv.addEventListener('scroll', apply);
+        apply();
+      })();
+    </script>
+    <script>
+      // Service worker: abre o app sem internet e acelera as próximas visitas.
+      // Só em produção (https); no `expo start` local ele atrapalharia o recarregamento.
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        window.addEventListener('load', function () {
+          navigator.serviceWorker.register('/sw.js').catch(function () {});
+        });
+      }
+    </script>
+  </head>
+
+  <body>
+    <noscript>Ative o JavaScript para usar o Junto.</noscript>
+    <!-- The root element for your Expo app. -->
+    <div id="root"></div>
+  </body>
+</html>

@@ -39,3 +39,16 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# segredos
+.env
+
+# gerado no postinstall (scripts/copy-zxing-wasm.mjs)
+/public/zxing_reader.wasm
+
+# Supabase CLI (arquivos locais, contém chaves do ambiente local)
+supabase/.temp/
+supabase/.branches/
+
+# build web
+/dist

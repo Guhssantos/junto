@@ -1,0 +1,62 @@
+# Configuração do Supabase CLI para desenvolvimento local (supabase start).
+# Produção é configurada no painel do Supabase — veja docs/CONFIGURACAO.md.
+project_id = "junto"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+major_version = 17
+
+[realtime]
+enabled = true
+
+[studio]
+enabled = true
+port = 54323
+
+[inbucket]
+# Caixa de e-mail local: confirmações e recuperação de senha aparecem em http://localhost:54324
+enabled = true
+port = 54324
+
+[storage]
+enabled = true
+file_size_limit = "2MiB"
+
+[auth]
+enabled = true
+site_url = "http://localhost:8081"
+additional_redirect_urls = ["junto://**", "exp://127.0.0.1:8081/--/**", "http://localhost:8081/**"]
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+minimum_password_length = 8
+password_requirements = "letters_digits"
+
+[auth.rate_limit]
+email_sent = 4
+sign_in_sign_ups = 30
+token_verifications = 30
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+secure_password_change = true
+max_frequency = "1m0s"
+otp_length = 6
+otp_expiry = 3600
+
+[functions.send-push]
+verify_jwt = false
+
+[auth.email.template.recovery]
+subject = "Seu código para redefinir a senha do Junto"
+content_path = "./supabase/templates/recovery.html"

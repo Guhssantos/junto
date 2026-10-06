@@ -1,0 +1,4 @@
+@echo off
+title Junto
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\iniciar.ps1"
+pause
