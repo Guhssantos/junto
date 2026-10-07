@@ -6,13 +6,12 @@ Material pronto para apresentar o Junto como projeto real de desenvolvimento.
 
 | Arquivo | Formato | Onde usar |
 | --- | --- | --- |
-| [`video/junto-40s.mp4`](video/junto-40s.mp4) | 16:9 · 1920×1080 · 40 s | README, portfólio, YouTube, apresentações |
-| [`video/junto-40s-vertical.mp4`](video/junto-40s-vertical.mp4) | 4:5 · 1080×1350 · 40 s | **feed do LinkedIn** (ocupa mais espaço na tela do celular) |
+| [`video/junto-40s.mp4`](video/junto-40s.mp4) | Full HD 1920×1080 · 40 s · com trilha sonora | LinkedIn, README, portfólio, YouTube, apresentações |
 | [`video/junto-apresentacao.mp4`](video/junto-apresentacao.mp4) | 16:9 · 1min38s | demonstração completa |
 
-Capas: `video/junto-40s-capa.png` e `video/junto-40s-vertical-capa.png` (use como miniatura no LinkedIn).
+Capa: `video/junto-40s-capa.png` (use como miniatura no LinkedIn).
 
-O vídeo não tem narração: os textos estão na tela, porque a maioria das pessoas assiste ao feed sem som.
+O vídeo tem **trilha sonora original** (120 BPM, composta em código por `video/trilha.mjs`, sem direitos autorais de terceiros) e **efeitos sutis sincronizados com a tela**: toques nos botões, notificações, a sincronização entre os dois celulares e as transições. Não há narração: os textos estão na tela, então o vídeo funciona com ou sem som (o LinkedIn começa sem som).
 
 ### Roteiro (40 s)
 
@@ -32,7 +31,7 @@ O vídeo não tem narração: os textos estão na tela, porque a maioria das pes
 
 ## Post para o LinkedIn
 
-> Anexe o vídeo vertical diretamente no post (vídeo nativo tem mais alcance que link) e coloque o link do GitHub no primeiro comentário, se preferir.
+> Anexe o vídeo diretamente no post (vídeo nativo tem mais alcance que link) e coloque o link do GitHub no primeiro comentário, se preferir.
 
 ```text
 Tudo começou numa ida ao supermercado com a minha mãe. 🛒

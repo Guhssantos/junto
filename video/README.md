@@ -2,7 +2,7 @@
 
 Há dois roteiros:
 
-- **Curto (40 s)**: `estudio/curto.js` → `docs/video/junto-40s.mp4` e `junto-40s-vertical.mp4` (4:5, LinkedIn).
+- **Curto (40 s)**: `estudio/curto.js` + `trilha.mjs` → `docs/video/junto-40s.mp4` (1920×1080, com trilha sonora).
 - **Completo (1min38s)**: `estudio/video.js` → `docs/video/junto-apresentacao.mp4`.
 
 ## Vídeo curto: gerar de novo
@@ -12,8 +12,8 @@ por `extrair-telas.mjs`). Requer Node, ffmpeg e Chrome/Chromium (defina `CHROME_
 
 ```bash
 npm install                              # dentro de video/ (a fonte Manrope vem do npm install da raiz)
-node renderizar.mjs curto                # 16:9 → docs/video/junto-40s.mp4
-node renderizar.mjs curto vertical       # 4:5  → docs/video/junto-40s-vertical.mp4
+node renderizar.mjs curto                # 1920×1080 com trilha → docs/video/junto-40s.mp4
+node trilha.mjs                          # só a trilha (trilha-40s.wav), para ouvir ou ajustar
 CAPA=26.6 node renderizar.mjs curto      # também salva a capa (quadro do segundo 26,6)
 ```
 
@@ -37,6 +37,7 @@ com WebCodecs + [mp4-muxer](https://github.com/Vanilagy/mp4-muxer). Nada é pago
 | `estudio/video.js` | Cenas, textos, tempos e transições do vídeo completo. |
 | `estudio/curto.js` | Cenas do vídeo de 40 s. |
 | `extrair-telas.mjs` | Recorta as telas reais do vídeo completo para `telas/`. |
+| `trilha.mjs` | Trilha sonora original e efeitos do vídeo curto, sintetizados em código (120 BPM; eventos sincronizados com as cenas). |
 | `renderizar.mjs` | Renderiza qualquer roteiro quadro a quadro (Chrome sem janela) e codifica com ffmpeg. |
 
 ## Como gerar

@@ -1,8 +1,8 @@
 // Renderiza o vídeo quadro a quadro num Chrome/Chromium sem janela e codifica o MP4 com o ffmpeg
 // (H.264, 30 fps). Não depende de WebCodecs, então funciona em qualquer máquina com ffmpeg.
 // Uso:
-//   node renderizar.mjs                     → vídeo de 40 s, 16:9  (docs/video/junto-40s.mp4)
-//   node renderizar.mjs curto vertical      → vídeo de 40 s, 4:5   (docs/video/junto-40s-vertical.mp4)
+//   node renderizar.mjs                     → vídeo de 40 s, 1920×1080, com trilha (docs/video/junto-40s.mp4)
+//   node renderizar.mjs curto vertical      → mesma coisa em 4:5 (docs/video/junto-40s-vertical.mp4)
 //   node renderizar.mjs completo            → vídeo completo (precisa das capturas em capturas/)
 // Opções por variável de ambiente: CHROME_PATH (navegador), CAPA=segundos (salva também a capa .png).
 import { spawn } from 'node:child_process';
@@ -57,7 +57,15 @@ try {
 
   const duracao = await page.evaluate(() => window.DURACAO());
   const total = Math.round(duracao * FPS);
-  const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-c:v', 'png', '-framerate', String(FPS), '-i', '-',
+  // vídeo curto: trilha sonora e efeitos sintetizados por trilha.mjs
+  const audio = [];
+  if (roteiro === 'curto') {
+    const wav = `${ROOT}trilha-40s.wav`;
+    await new Promise((ok, falha) => spawn(process.execPath, [`${ROOT}trilha.mjs`, wav], { stdio: 'inherit' })
+      .on('close', (c) => (c === 0 ? ok() : falha(new Error('trilha.mjs falhou')))));
+    audio.push('-i', wav, '-c:a', 'aac', '-b:a', '192k', '-ar', '48000', '-shortest');
+  }
+  const ff = spawn('ffmpeg', ['-v', 'error', '-y', '-f', 'image2pipe', '-c:v', 'png', '-framerate', String(FPS), '-i', '-', ...audio,
     '-c:v', 'libx264', '-preset', 'slow', '-crf', '18', '-pix_fmt', 'yuv420p', '-profile:v', 'high', '-movflags', '+faststart', saida], { stdio: ['pipe', 'inherit', 'inherit'] });
   const fim = new Promise((ok, falha) => ff.on('close', (c) => (c === 0 ? ok() : falha(new Error(`ffmpeg saiu com ${c}`)))));
   for (let f = 0; f < total; f++) {
