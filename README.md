@@ -8,11 +8,13 @@
 
 👉 **Use agora, de graça:** <https://junto.gusttavo-ssantos.workers.dev> (celular ou computador; dá para instalar na tela inicial)
 
-### 🎬 Veja o app funcionando (1min38s)
+### 🎬 O Junto em 40 segundos
 
-[![Vídeo de apresentação do Junto](docs/video/capa.png)](docs/video/junto-apresentacao.mp4)
+[![Vídeo de 40 segundos apresentando o Junto](docs/video/junto-40s-capa.png)](docs/video/junto-40s.mp4)
 
-<sub>Telas reais do app: duas pessoas usando a mesma lista ao mesmo tempo. Como o vídeo foi gerado: [video/README.md](video/README.md).</sub>
+<sub>Telas reais do app: duas pessoas usando a mesma lista ao mesmo tempo. Também em [formato vertical (4:5)](docs/video/junto-40s-vertical.mp4) e na [versão completa de 1min38s](docs/video/junto-apresentacao.mp4). Como os vídeos são gerados: [video/README.md](video/README.md).</sub>
+
+> **De uma necessidade do dia a dia a uma solução tecnológica.** O Junto nasceu de uma situação real (fazer compras com a minha mãe comparando preços entre mercados) e virou um app completo: React Native + Expo, Supabase com tempo real, regras de segurança no banco, modo offline, testes automatizados e CI/CD. Veja a [história](#a-história), [o que ele faz](#o-que-ele-faz) e [como foi feito](#como-foi-feito).
 
 ## A história
 
@@ -177,6 +179,7 @@ docs/                  Arquitetura, banco, segurança, configuração, deploy, d
 - [Deploy: APK, AAB, iOS e backend de produção](docs/DEPLOY.md)
 - [Desenvolvimento: novas funcionalidades, configurações e testes](docs/DESENVOLVIMENTO.md)
 - [Revisão final: problemas encontrados, correções e próximos passos](docs/REVISAO.md)
+- [Divulgação: vídeos, post para o LinkedIn e configuração do GitHub](docs/DIVULGACAO.md)
 
 ## 9. Custos
 

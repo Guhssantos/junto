@@ -13,6 +13,10 @@
     <canvas id="palco" width="1920" height="1080"></canvas>
     <div id="status">carregando…</div>
     <script src="/mp4-muxer.js"></script>
-    <script type="module" src="/estudio/video.js"></script>
+    <script type="module">
+      // ?roteiro=curto → vídeo de 40 s (estudio/curto.js); sem parâmetro → vídeo completo (estudio/video.js)
+      const roteiro = new URLSearchParams(location.search).get('roteiro');
+      import(roteiro === 'curto' ? '/estudio/curto.js' : '/estudio/video.js');
+    </script>
   </body>
 </html>
